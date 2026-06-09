@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos de Luis Edu</title>
+  <style>
+    :root {
+      --bg:#fbfaf6;
+      --text:#111111;
+      --muted:#626262;
+      --card:#ffffff;
+      --line:#e8e0d4;
+      --green:#16a34a;
+      --dark:#111111;
+      --soft:#f2ede4;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
+    img, video { max-width:100%; display:block; }
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1120px,92%); margin:auto; }
+    header { position:sticky; top:0; z-index:50; background:rgba(251,250,246,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+    nav { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:15px 0; }
+    .brand { font-weight:950; letter-spacing:-.05em; }
+    .nav-links { display:flex; gap:18px; color:#444; font-size:.92rem; }
+    .nav-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; border:1px solid var(--line); background:#fff; font-weight:850; gap:8px; transition:.2s ease; box-shadow:0 8px 18px rgba(0,0,0,.045); }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 14px 26px rgba(0,0,0,.09); }
+    .btn:focus, .btn:active { outline:3px solid rgba(22,163,74,.18); outline-offset:2px; }
+    .btn.primary { background:var(--green); color:white; border-color:var(--green); }
+    .btn.dark { background:#fff; color:var(--text); border-color:var(--line); }
+    .btn.instagram { color:#fff; border:0; background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
+    section { padding:76px 0; }
+    .eyebrow { display:inline-block; text-transform:uppercase; letter-spacing:.14em; font-size:.76rem; font-weight:900; color:#777; margin-bottom:10px; }
+    h1 { font-size:clamp(3rem,8vw,6.4rem); line-height:.88; letter-spacing:-.085em; margin:0 0 18px; }
+    h2 { font-size:clamp(2.1rem,5vw,3.6rem); line-height:.96; letter-spacing:-.065em; margin:0 0 14px; }
+    h3 { font-size:1.35rem; letter-spacing:-.035em; margin:0 0 9px; }
+    p { color:var(--muted); line-height:1.62; font-size:1.04rem; }
+    .hero { padding:64px 0 34px; }
+    .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; }
+    .hero-img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:36px; box-shadow:0 24px 70px rgba(0,0,0,.16); }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:26px 0 18px; }
+    .stat { background:#fff; border:1px solid var(--line); border-radius:24px; padding:22px; }
+    .stat strong { display:block; font-size:1.55rem; letter-spacing:-.045em; }
+    .section-head { max-width:800px; margin-bottom:30px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:28px; padding:24px; box-shadow:0 14px 34px rgba(0,0,0,.045); }
+    .card.dark { background:linear-gradient(145deg,#0f7a3a,#16a34a); color:#fff; border-color:rgba(255,255,255,.18); }
+    .card.dark p, .card.dark li { color:#eefaf1; }
+    .card.dark .price { color:#fff; }
+    .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center; }
+    .story-photos { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .story-photos img { width:100%; height:205px; object-fit:cover; border-radius:24px; }
+    .story-photos img:first-child { grid-column:1/-1; height:280px; }
+    .mini-note { background:var(--soft); border:1px solid var(--line); border-radius:22px; padding:18px; margin-top:18px; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .service-card { min-height:220px; display:flex; flex-direction:column; justify-content:space-between; }
+    .media-split { display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:center; margin-top:28px; }
+    .media-split img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:30px; }
+    .price { font-size:1.8rem; font-weight:950; margin:12px 0; }
+    ul { padding-left:20px; margin:14px 0 0; color:#555; line-height:1.72; }
+    .packages { display:flex; gap:14px; overflow-x:auto; padding-bottom:12px; }
+    .package { min-width:235px; flex:1; display:flex; flex-direction:column; justify-content:space-between; }
+    .camp-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:stretch; }
+    .camp-photo-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .camp-photo-grid img { width:100%; height:220px; object-fit:cover; border-radius:24px; }
+    .camp-photo-grid img:first-child { grid-column:1/-1; height:280px; }
+    .video-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .video-card { background:#fff; border:1px solid var(--line); border-radius:26px; padding:12px; }
+    .video-card video { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:18px; background:#111; }
+    .video-card h3 { padding:12px 6px 6px; }
+    .novedades { background:var(--soft); }
+    .news-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .contact-box { background:linear-gradient(135deg,rgba(17,17,17,.78),rgba(15,122,58,.82)), url("assets/soccerkids-noche.jpg") center/cover; color:#fff; border-radius:38px; padding:64px 24px; text-align:center; position:relative; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,.18); }
+    .contact-box:before { content:'⚽'; position:absolute; right:26px; top:18px; font-size:5rem; opacity:.16; transform:rotate(-14deg); }
+    .contact-box:after { content:''; position:absolute; inset:18px; border:1px solid rgba(255,255,255,.18); border-radius:30px; pointer-events:none; }
+    .contact-box p { color:#f3f4f6; margin:auto; max-width:720px; }
+    .contact-box .actions, .contact-box h2, .contact-box p, .contact-box .eyebrow { position:relative; z-index:1; }
+    footer { padding:28px 0; color:#777; }
+    @media(max-width:900px) {
+      .nav-links { display:none; }
+      .hero-grid, .story-grid, .media-split, .camp-grid { grid-template-columns:1fr; }
+      .stats, .services-grid, .video-grid, .news-grid { grid-template-columns:1fr; }
+      .story-photos img, .story-photos img:first-child, .camp-photo-grid img, .camp-photo-grid img:first-child { height:auto; }
+      section { padding:54px 0; }
+    }
+  
+    .history-main-photo{object-fit:contain!important;background:#fff;padding:10px}
+    .product-photo{width:100%;height:210px;object-fit:cover;border-radius:22px;margin-bottom:16px;background:#eee}
+    .card.dark .product-photo{border:1px solid rgba(255,255,255,.2)}
+    .custom-pack-note{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;margin-top:18px}
+
+    .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
+    .count-item { background:var(--soft); border:1px solid var(--line); border-radius:18px; padding:14px 10px; text-align:center; }
+    .count-item strong { display:block; font-size:1.45rem; letter-spacing:-.04em; color:var(--text); }
+    .count-item span { font-size:.78rem; color:#666; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    .camp-card { display:flex; flex-direction:column; justify-content:space-between; }
+    .camp-meta { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+    .pill { display:inline-flex; padding:8px 12px; border-radius:999px; background:var(--soft); border:1px solid var(--line); font-weight:850; font-size:.9rem; }
+    .package-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+    .card { position:relative; overflow:hidden; }
+    .card:after { content:''; position:absolute; inset:auto 18px 0 18px; height:3px; border-radius:999px; background:linear-gradient(90deg,#16a34a,#facc15,#ef4444); opacity:.45; }
+    @media(max-width:900px){ .countdown{grid-template-columns:repeat(2,1fr);} }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">PRODUCTOS DE LUIS EDU</div>
+        <div class="nav-links">
+          <a href="#historia">Mi historia</a>
+          <a href="#soccerkids">SoccerKids</a>
+          <a href="#negocios">Negocios</a>
+          <a href="#campamentos">Campamentos</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn primary" href="https://wa.me/526621747274?text=Hola%20Luis%2C%20quiero%20información%20de%20tus%20servicios" target="_blank">WhatsApp</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">SoccerKids • Contenido • Eventos</span>
+          <h1>Luis Edu</h1>
+          <p>Emprendedor sonorense, creador de contenido y organizador de experiencias para familias, niños, negocios y eventos.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://wa.me/526621747274?text=Hola%20Luis%2C%20quiero%20cotizar%20un%20servicio" target="_blank">Cotizar por WhatsApp</a>
+            <a class="btn instagram" href="https://www.instagram.com/productos_de_luis_edu/" target="_blank">Seguir en Instagram</a>
+            <a class="btn" href="#soccerkids">Ver SoccerKids</a>
+          </div>
+        </div>
+        <img class="hero-img" src="assets/hero-luis-edu.jpg" alt="Luis Edu en evento con comunidad">
+      </div>
+    </section>
+
+    <div class="container stats">
+      <div class="stat"><strong>+16K</strong><span>seguidores</span></div>
+      <div class="stat"><strong>Millones</strong><span>de visualizaciones</span></div>
+      <div class="stat"><strong>Miles</strong><span>de servicios realizados</span></div>
+      <div class="stat"><strong>Sonora</strong><span>Hermosillo y Ciudad Obregón</span></div>
+    </div>
+
+    <!-- 2. MI HISTORIA -->
+    <section id="historia">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Mi historia</span>
+          <h2>Emprendedor desde joven.</h2>
+          <p>Antes de SoccerKids, campamentos y promoción para negocios, mi historia empezó con ventas, entregas y trabajo constante.</p>
+        </div>
+
+        <div class="story-grid">
+          <div class="story-photos">
+            <img src="assets/historia-proyecto-puente.jpg" alt="Nota de Proyecto Puente" class="history-main-photo">
+            <img src="assets/historia-bicicleta.jpg" alt="Entregas en bicicleta">
+            <img src="assets/historia-caja.jpg" alt="Caja de cecina">
+            <img src="assets/historia-carro.jpg" alt="Entrega de pedidos">
+          </div>
+
+          <div class="card">
+            <h3>Desde los 11 años</h3>
+            <p>Soy Luis Eduardo Castro, un joven emprendedor sonorense. Desde pequeño empecé a emprender vendiendo productos, haciendo entregas y aprendiendo la importancia de atender bien a cada cliente.</p>
+            <p>Lo que empezó como pequeños proyectos fue creciendo hasta convertirse en una marca que hoy reúne servicios, experiencias, contenido, eventos y actividades para familias, negocios y comunidades.</p>
+            <div class="mini-note">
+              <strong>Campañas sociales y comunitarias</strong>
+              <p>También he impulsado campañas sociales para apoyar a personas, familias y niños a través del deporte, la solidaridad y la unión de la comunidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PRODUCTOS Y SERVICIOS -->
+    <section id="soccerkids">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Productos y servicios</span>
+          <h2>SoccerKids, contenido y experiencias.</h2>
+          <p>Servicios para eventos, escuelas, restaurantes, marcas, familias y negocios locales.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="card service-card">
+            <div>
+              <img class="product-photo" src="assets/soccerkids-mini.jpg" alt="SoccerKids Mini mesa negra">
+              <h3>SoccerKids Mini</h3>
+              <p>Mesa de SoccerKids única en la ciudad, ideal para niños de kinder a tercero de primaria. Es una atracción diferente, divertida y muy llamativa para fiestas, convivencias y eventos. Los niños se entretienen muchísimo y la diversión está garantizada.</p>
+              <div class="price">$1,600</div>
+              <p>Hasta 3 horas para el día de tu evento.</p>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20saber%20m%C3%A1s%20informaci%C3%B3n%20del%20SoccerKids%20Mini." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20rentar%20el%20SoccerKids%20Mini." target="_blank">Rentar Mini</a>
+            </div>
+          </div>
+
+          <div class="card service-card">
+            <div>
+              <img class="product-photo" src="assets/soccerkids-pro.jpg" alt="SoccerKids Pro mesa blanca">
+              <h3>SoccerKids Pro</h3>
+              <p>Mesa de SoccerKids Pro única y muy vistosa, ideal para niños de cuarto de primaria hasta adultos. Perfecta para eventos grandes, restaurantes y activaciones donde quieres que la gente participe, conviva y se divierta desde el primer momento.</p>
+              <div class="price">$2,100</div>
+              <p>Hasta 3 horas para tu evento.</p>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20saber%20m%C3%A1s%20informaci%C3%B3n%20del%20SoccerKids%20Pro." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20rentar%20el%20SoccerKids%20Pro." target="_blank">Rentar Pro</a>
+            </div>
+          </div>
+
+          <div class="card service-card" id="negocios">
+            <div>
+              <img class="product-photo" src="assets/soccerkids-restaurante.jpg" alt="SoccerKids en restaurante para colaboración con negocios">
+              <h3>Promoción para negocios</h3>
+              <p>Reels, historias, cobertura, visitas, trabajo con marcas, colaboraciones con restaurantes y contenido adaptado al estilo de tu negocio.</p>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="#paquetes">Ver paquetes</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20crear%20contenido%20para%20mi%20negocio." target="_blank">Crear contenido</a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="media-split">
+          <img src="assets/soccerkids-pro.jpg" alt="SoccerKids Pro con dos mesas">
+          <div>
+            <span class="eyebrow">SoccerKids Pro</span>
+            <h2>La versión grande para eventos.</h2>
+            <p>Una opción más amplia y llamativa para fiestas, escuelas, restaurantes, kermeses, eventos empresariales y activaciones de marca.</p>
+            <ul>
+              <li>Ideal para niños grandes, jóvenes y adultos.</li>
+              <li>Perfecto para eventos con más invitados.</li>
+              <li>Disponible en Ciudad Obregón.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="media-split">
+          <div>
+            <span class="eyebrow">Eventos reales</span>
+            <h2>SoccerKids en restaurantes y convivencias.</h2>
+            <p>El juego funciona muy bien como atracción para restaurantes, reuniones, escuelas, fiestas y activaciones donde quieres que la gente participe.</p>
+          </div>
+          <img src="assets/soccerkids-restaurante.jpg" alt="SoccerKids en restaurante">
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PAQUETES NEGOCIOS -->
+    <section id="paquetes">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Promoción para negocios</span>
+          <h2>Paquetes para marcas y negocios.</h2>
+          <p>Contenido para redes sociales, visitas, reels, historias, difusión en @productos_de_luis_edu y personalización según tu marca o evento.</p>
+        </div>
+
+        <div class="custom-pack-note">
+          <strong>Todos los paquetes pueden personalizarse.</strong>
+          <p>Podemos adaptar el contenido según el tipo de negocio, marca, evento, campaña o promoción que quieras comunicar.</p>
+          <div class="package-actions">
+            <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20solicitar%20y%20cotizar%20un%20paquete%20para%20mi%20negocio." target="_blank">Solicita y cotiza</a>
+            <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20una%20experiencia%20personalizada%20para%20mi%20marca%20o%20negocio." target="_blank">Experiencia personalizada</a>
+          </div>
+        </div>
+
+        <div class="packages">
+          <div class="card package">
+            <h3>Historia Express</h3><div class="price">$500</div><p>3 a 5 historias con etiqueta.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20paquete%20Historia%20Express." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20contratar%20el%20paquete%20Historia%20Express." target="_blank">Contratar paquete</a>
+            </div>
+          </div>
+          <div class="card package">
+            <h3>Unboxing</h3><div class="price">$700</div><p>Producto, prueba y etiqueta.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20paquete%20Unboxing." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20contratar%20el%20paquete%20Unboxing." target="_blank">Contratar paquete</a>
+            </div>
+          </div>
+          <div class="card package">
+            <h3>Visita Sencilla</h3><div class="price">$1,200</div><p>Visita presencial + historias.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20paquete%20Visita%20Sencilla." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20contratar%20el%20paquete%20Visita%20Sencilla." target="_blank">Contratar paquete</a>
+            </div>
+          </div>
+          <div class="card package">
+            <h3>Visita + Reel</h3><div class="price">$1,800</div><p>Historias + reel publicado.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20paquete%20Visita%20%2B%20Reel." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20contratar%20el%20paquete%20Visita%20%2B%20Reel." target="_blank">Contratar paquete</a>
+            </div>
+          </div>
+          <div class="card package">
+            <h3>Experiencia Completa</h3><div class="price">$2,500</div><p>Cobertura, fotos, historias, reel y personalización.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20paquete%20Experiencia%20Completa." target="_blank">Más información</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20contratar%20el%20paquete%20Experiencia%20Completa." target="_blank">Contratar paquete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CAMPAMENTOS INDEPENDIENTE -->
+    <section id="campamentos">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Campamentos</span>
+          <h2>Campamentos de verano.</h2>
+          <p>Los campamentos son una sección temporal cuando están activos, separada de los productos principales para que no se confunda con los servicios permanentes.</p>
+        </div>
+
+        <div class="camp-photo-grid" style="margin-bottom:24px">
+          <img src="assets/campamento-alberca.jpg" alt="Campamento alberca">
+          <img src="assets/campamento-actividad.jpg" alt="Actividad de campamento">
+          <img src="assets/campamento-ultimo-dia.jpg" alt="Último día de campamento">
+        </div>
+
+        <div class="camp-grid">
+          <div class="card camp-card">
+            <div>
+              <span class="eyebrow">Inscripciones abiertas</span>
+              <h3>Campamento Hermosillo</h3>
+              <p>Del <strong>6 al 10 de julio de 2026</strong>. Una semana llena de fútbol, juegos de mesa, Mundial, talent show, relevos, dinámicas, convivencia y mucha diversión.</p>
+              <div class="camp-meta">
+                <span class="pill">6 a 12 años</span>
+                <span class="pill">$1,400 MXN</span>
+                <span class="pill">9:00 am a 1:00 pm</span>
+              </div>
+              <div class="countdown" data-target="2026-07-06T09:00:00" aria-label="Cuenta regresiva Hermosillo">
+                <div class="count-item"><strong data-days>0</strong><span>Días</span></div>
+                <div class="count-item"><strong data-hours>0</strong><span>Horas</span></div>
+                <div class="count-item"><strong data-minutes>0</strong><span>Min</span></div>
+                <div class="count-item"><strong data-seconds>0</strong><span>Seg</span></div>
+              </div>
+              <ul>
+                <li>Actividades deportivas y recreativas.</li>
+                <li>SoccerKids, retos, dinámicas y nuevas amistades.</li>
+                <li>Lugares limitados.</li>
+              </ul>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20inscribir%20a%20mi%20hijo%20en%20el%20campamento%20de%20Hermosillo." target="_blank">Inscribir a mi hijo</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20saber%20m%C3%A1s%20informaci%C3%B3n%20del%20campamento%20de%20Hermosillo." target="_blank">Más información</a>
+            </div>
+          </div>
+
+          <div class="card camp-card">
+            <div>
+              <span class="eyebrow">Inscripciones abiertas</span>
+              <h3>Campamento Ciudad Obregón</h3>
+              <p>Del <strong>13 al 17 de julio de 2026</strong>. Vamos a tener fútbol, juegos de mesa, Mundial, talent show, relevos, dinámicas, convivencia y mucha diversión.</p>
+              <div class="camp-meta">
+                <span class="pill">6 a 12 años</span>
+                <span class="pill">$1,300 MXN</span>
+                <span class="pill">9:00 am a 1:00 pm</span>
+              </div>
+              <div class="countdown" data-target="2026-07-13T09:00:00" aria-label="Cuenta regresiva Ciudad Obregón">
+                <div class="count-item"><strong data-days>0</strong><span>Días</span></div>
+                <div class="count-item"><strong data-hours>0</strong><span>Horas</span></div>
+                <div class="count-item"><strong data-minutes>0</strong><span>Min</span></div>
+                <div class="count-item"><strong data-seconds>0</strong><span>Seg</span></div>
+              </div>
+              <ul>
+                <li>Campamento para niños de 6 a 12 años.</li>
+                <li>Actividades, juegos, deporte y ambiente seguro.</li>
+                <li>Lugares limitados.</li>
+              </ul>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20inscribir%20a%20mi%20hijo%20en%20el%20campamento%20de%20Ciudad%20Obreg%C3%B3n." target="_blank">Inscribir a mi hijo</a>
+              <a class="btn dark" href="https://wa.me/526621747274?text=Hola%2C%20buenas%20tardes.%20Me%20gustar%C3%ADa%20saber%20m%C3%A1s%20informaci%C3%B3n%20del%20campamento%20de%20Ciudad%20Obreg%C3%B3n." target="_blank">Más información</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EXPERIENCIAS REALES -->
+    <section id="experiencias">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Experiencias reales</span>
+          <h2>Videos que muestran cómo se vive.</h2>
+          <p>Videos reales de clientes, niños, restaurantes y kermeses usando SoccerKids.</p>
+        </div>
+
+        <div class="video-grid">
+          <div class="video-card"><video src="assets/video-ninos-felices.mp4" controls muted playsinline></video><h3>Clientes felices</h3></div>
+          <div class="video-card"><video src="assets/video-como-se-juega.mp4" controls muted playsinline></video><h3>¿Cómo se juega?</h3></div>
+          <div class="video-card"><video src="assets/video-restaurante.mp4" controls muted playsinline></video><h3>Activación en restaurante</h3></div>
+          <div class="video-card"><video src="assets/video-kermes.mp4" controls muted playsinline></video><h3>SoccerKids en kermés</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. NOVEDADES -->
+    <section id="novedades" class="novedades">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Novedades</span>
+          <h2>Lo más reciente.</h2>
+          <p>Espacio para publicar promociones, campamentos, eventos, nuevos reels, activaciones y campañas.</p>
+        </div>
+
+        <div class="news-grid">
+          <div class="card"><h3>Promociones</h3><p>Ofertas y servicios especiales por temporada.</p></div>
+          <div class="card"><h3>Eventos</h3><p>SoccerKids en restaurantes, escuelas y kermeses.</p></div>
+          <div class="card"><h3>Campamentos</h3><p>Información cuando estén activos.</p></div>
+          <div class="card"><h3>Campañas sociales</h3><p>Menciones breves de proyectos comunitarios.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <span class="eyebrow">Contacto</span>
+          <h2>¿Listo para llevar tu evento o negocio al siguiente nivel?</h2>
+          <p>Escríbeme para cotizar SoccerKids, promoción para tu negocio, campamentos o una activación personalizada. Hagamos una experiencia que la gente recuerde.</p>
+          <div class="actions" style="justify-content:center">
+            <a class="btn primary" href="https://wa.me/526621747274?text=Hola%20Luis%2C%20quiero%20información%20de%20tus%20servicios" target="_blank">Enviar WhatsApp</a>
+            <a class="btn instagram" href="https://www.instagram.com/productos_de_luis_edu/" target="_blank">Seguir en Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© Productos de Luis Edu · WhatsApp 662 174 7274 · Instagram @productos_de_luis_edu</div>
+  </footer>
+  <script>
+    function updateCountdowns() {
+      document.querySelectorAll('.countdown').forEach(function(box) {
+        var target = new Date(box.dataset.target).getTime();
+        var now = new Date().getTime();
+        var diff = Math.max(0, target - now);
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        var minutes = Math.floor((diff / (1000 * 60)) % 60);
+        var seconds = Math.floor((diff / 1000) % 60);
+        box.querySelector('[data-days]').textContent = days;
+        box.querySelector('[data-hours]').textContent = hours;
+        box.querySelector('[data-minutes]').textContent = minutes;
+        box.querySelector('[data-seconds]').textContent = seconds;
+      });
+    }
+    updateCountdowns();
+    setInterval(updateCountdowns, 1000);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+VERSION FINAL REAL
+
+Cambios reales aplicados:
+- Se cambió la portada a la foto fuerte anterior de Luis Edu.
+- Campamentos ya NO está dentro de productos y servicios.
+- Campamentos ahora es sección independiente.
+- Se eliminó la sección grande de Impacto/Labor social.
+- Solo se menciona que Luis ha hecho campañas sociales.
+- Fotos y videos están dentro de assets para que carguen correctamente.
+- Se cuidó no repetir fotos principales.
+
+Archivos copiados: 16
